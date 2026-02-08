@@ -1,0 +1,74 @@
+FROM quay.io/rms/fedora-base:latest
+
+RUN dnf -y install --no-docs --best https://rpms.remirepo.net/fedora/remi-release-43.rpm && dnf module reset php -y && dnf module enable php:remi-8.4 -y && dnf -y install --no-docs --best --skip-unavailable \
+        httpd redis ffmpeg perl-Image-ExifTool \
+        php-symfony-class-loader \
+        php-symfony-common \
+        php-symfony-process \
+        php-symfony-yaml \
+        php-symfony-css-selector \
+        php-symfony-dom-crawler \
+        php-symfony-browser-kit \
+        php-symfony-debug \
+        php-symfony-expression-language \
+        php-symfony-filesystem \
+        php-symfony-config \
+        php-symfony-dependency-injection \
+        php-symfony-finder \
+        php-symfony-http-foundation \
+        php-symfony-var-dumper \
+        php-symfony-console \
+        php-symfony-event-dispatcher \
+        php-symfony-http-kernel \
+        php-fedora-autoloader \
+        php-PsrLog \
+        php-symfony-polyfill \
+        php-pecl-zip \
+        php-symfony4-common \
+        php-symfony4-debug \
+        php-symfony4-process \
+        php-composer-pcre \
+        php-psr-cache \
+        php-psr-container \
+        php-psr-event-dispatcher \
+        php-symfony-contracts \
+        php-pecl-msgpack \
+        php-pecl-imagick \
+        php-pecl-redis5 \
+        php-symfony4-console \
+        php-composer-xdebug-handler2 \
+        php-symfony4-filesystem \
+        php-symfony4-finder \
+        php-composer-xdebug-handler \
+        php-justinrainbow-json-schema5 \
+        php-jsonlint \
+        php-composer-ca-bundle \
+        php-composer-metadata-minifier \
+        php-composer-semver3 \
+        php-react-promise \
+        php-seld-phar-utils \
+        php-composer-spdx-licenses \
+        php-pecl-apcu \
+        php-pecl-igbinary \
+        php-pear \
+        php-common \
+        php-pdo \
+        php-cli \
+        php-fpm \
+        php-mbstring \
+        php-opcache \
+        php-sodium \
+        php-xml \
+        php-mysqlnd \
+        php-bcmath \
+        php-gd \
+        php-gmp \
+        php-intl \
+        php-ldap \
+        php-process \
+        php-pspell
+
+
+COPY notify_push.service /etc/systemd/system/notify_push.service
+
+RUN /usr/bin/systemctl enable httpd php-fpm.service redis notify_push
