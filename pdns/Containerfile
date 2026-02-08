@@ -1,5 +1,5 @@
 FROM quay.io/rms/fedora-base:latest
 
-RUN dnf -y install --no-docs --best pdnf pdns-backend-ldap pdns-backend-lua2 pdns-backend-mysql pdns-backend-postgresql pdns-backend-remote pdns-backend-pipe pdns-backend-sqlite pdns-backend-tinydns pdns-tools
+RUN dnf -y install --no-docs --best pdns pdns-backend-ldap pdns-backend-lua2 pdns-backend-mysql pdns-backend-postgresql pdns-backend-remote pdns-backend-pipe pdns-backend-sqlite pdns-backend-tinydns pdns-tools
 
 RUN /usr/bin/systemctl enable pdns
